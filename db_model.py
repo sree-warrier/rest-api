@@ -10,6 +10,10 @@ class Post(db.Model):
     text = db.Column(db.String, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, text):
+    def __init__(self, text, id):
+        self.id = id
         self.text = text
         self.date_posted = datetime.datetime.now()
+
+
+#create table posts (id int, text varchar(255), date_posted varchar(255))

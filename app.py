@@ -15,13 +15,14 @@ db = SQLAlchemy(app)
 from db_model import *
 
 # Create a URL route in our application for "/"
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST':
-        text = request.form['text']
-        post = Post(text)
-        db.session.add(post)
-        db.session.commit()
+@app.route('/api/message', methods=['POST'])
+def newMessage():
+    #if request.method == 'POST':
+    message = request.form['text']
+    post = Post(message)
+    #print(Post)
+    db.session.add(post)
+    db.session.commit()
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('home.html', posts=posts)
 
