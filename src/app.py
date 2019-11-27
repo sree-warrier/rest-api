@@ -4,7 +4,6 @@ from flask import Flask
 from flask import request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from db_config import DbConfig
-import time
 
 # Create the application instance
 app = Flask(__name__, template_folder="templates")
@@ -35,16 +34,28 @@ def listMsg():
 
 @app.route('/api/message/<msg_id>', methods=['GET'])
 def getMsgId(msg_id):
-    message = Post.query.get(msg_id).text
-    return render_template('output1.html', message=message)
+    message = Post.query.get(msg_id)
+    print(message)
+    if message is None:
+        return render_template('error.html')
+    else:
+        message = Post.query.get(msg_id).text
+        if message == str(message)[::-1]:
+            return render_template('output1.html', message=message)
+            print("Palindrome Check - Passed")
+        else:
+            return render_template('output4.html', message=message)
+            print("Palindrome Check - Failed")
 
 @app.route('/api/message/<msg_id>', methods=['DELETE'])
 def delMsg(msg_id):
     delmessage = Post.query.filter_by(id=msg_id).first()
-    db.session.delete(delmessage)
-    db.session.commit()
-    return render_template('output2.html')
-
+    if delmessage is not None:
+        db.session.delete(delmessage)
+        db.session.commit()
+        return render_template('output2.html')
+    else:
+        return render_template('error.html')
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
     app.run(
