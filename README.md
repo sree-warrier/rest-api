@@ -52,6 +52,12 @@ Usage
 
 1. Login to the instance using the key-pair
 
+2. Create DB schema
+
+      ```
+      create table posts (id int NOT NULL AUTO_INCREMENT UNIQUE, text varchar(255) NOT NULL, date_posted varchar(255) NOT NULL);
+      ```
+
 2. Create docker-compose.yml file:
 
     ```touch docker-compose.yml```
@@ -90,8 +96,8 @@ Usage
     Retrived all messages from the DB using the api URL /api/message
 
       ```
-       curl request - curl -X GET http://elb-endpoint:8080/api/message
-       UI - http://elb-endpoint:8080/api/message
+      curl request - curl -X GET http://elb-endpoint:8080/api/message
+      UI - http://elb-endpoint:8080/api/message
       ```
 
   * GET a specific message
