@@ -85,7 +85,7 @@ resource "aws_instance" "app" {
   count         = 1
   ami           = "ami-04613ff1fdcd2eab1"
   instance_type = "t2.micro"
-  key_name = "sreekanth-key"
+  key_name = "key-pair"
   subnet_id = "${element(module.vpc.private_subnets, 0)}"
   vpc_security_group_ids = ["${aws_security_group.allow_tls.id}","${aws_security_group.allow_ssh_slave.id}"]
   user_data = "${file("rest-instance.sh")}"
@@ -98,7 +98,7 @@ resource "aws_instance" "jump" {
   count                  = 1
   ami                    = "ami-04613ff1fdcd2eab1"
   instance_type          = "t2.micro"
-  key_name               = "sreekanth-key"
+  key_name               = "key-pair"
   associate_public_ip_address	= true
   vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}"]
   subnet_id              = "${element(module.vpc.public_subnets, 0)}"
