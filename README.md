@@ -24,21 +24,22 @@ Prerequisites
 Usage
 -----
 
-Building the infra using terraform commands
+* Infra Deployment
 
-The following steps will walk you through the process:
+Building the infra using terraform commands, following steps will walk you through the process:
 
-1. Clone the repo::
+1. Clone the repo:
 
       git clone `https://github.com/sree-warrier/rest-api.git`
 
-2. Following should be created before terraform file execution::
+2. Following should be created before terraform file execution:
 
     - Create a keypair
     - Update key pair under respective locations of main.tf
     - Configure aws credentials, update the access and secret keys in variable.tf
+    - Update the local public IP in the 'jump-ssh' and 'app-elb-sg' sec-grp section
 
-3. infra-tf directory conatins the terraform file for infra setup, use the following steps::
+3. infra-tf directory conatins the terraform file for infra setup, use the following steps:
 
       ```
       cd infra-tf
@@ -47,10 +48,11 @@ The following steps will walk you through the process:
       terraform apply
       ```
 
+* App Deployment
 
-4. Login to the cluster instance using the keys::
+1. Login to the instance using the key-pair
 
-5. Create docker-compose.yml file::
+2. Create docker-compose.yml file:
 
     ```touch docker-compose.yml```
 
@@ -67,13 +69,24 @@ The following steps will walk you through the process:
               ports:
                   - "8000:8000"
 
-   Update the environment variables which are prompted during the terraform execution
+   Update the DB environment variables which are prompted during the terraform execution
 
-6. Run docker using the docker-compose file::
+3. Run docker using the docker-compose file (docker components are installed using the user-data in terraform file)
 
       docker-compose up
 
-7. Use the ELB CNAME record to access via browser
+4. Public facing ELB created, use the ELB endpoint for accessing the app.
+
+      UI : http://elb-endpoint:8080
+
+5. API's
+
+      post message done through UI - http://elb-endpoint:8080
+      get all messages - curl -X GET http://elb-endpoint:8080/api/message
+      get a particular message - curl -X GET http://elb-endpoint:8080/api/message/msg_id
+      delete a particular message - curl -X DELETE http://elb-endpoint:8080/api/message/msg_id
+
+
 
 ## Credits
 

@@ -145,7 +145,7 @@ resource "aws_security_group" "allow_elb_tls" {
     protocol    = "tcp"
     # Please restrict your ingress to only necessary IPs and ports.
     # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["Your IP"]
   }
     egress {
     from_port       = 0
@@ -189,7 +189,7 @@ resource "aws_security_group" "allow_ssh" {
     protocol    = "tcp"
     # Please restrict your ingress to only necessary IPs and ports.
     # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
-    cidr_blocks = ["49.207.57.141/32"]
+    cidr_blocks = ["Your IP"]
   }
     egress {
     from_port       = 0
