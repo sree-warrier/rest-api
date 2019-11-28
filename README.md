@@ -24,9 +24,9 @@ Prerequisites
 Usage
 -----
 
-* Infra Deployment
+### Infra Deployment
 
-Building the infra using terraform commands, following steps will walk you through the process:
+      Building the infra using terraform commands, following steps will walk you through the process:
 
 1. Clone the repo:
 
@@ -48,7 +48,7 @@ Building the infra using terraform commands, following steps will walk you throu
       terraform apply
       ```
 
-* App Deployment
+### App Deployment
 
 1. Login to the instance using the key-pair
 
@@ -81,12 +81,35 @@ Building the infra using terraform commands, following steps will walk you throu
 
 5. API's
 
-      post message done through UI - http://elb-endpoint:8080
-      get all messages - curl -X GET http://elb-endpoint:8080/api/message
-      get a particular message - curl -X GET http://elb-endpoint:8080/api/message/msg_id
-      delete a particular message - curl -X DELETE http://elb-endpoint:8080/api/message/msg_id
+  * POST new message
 
+    Messages are posted via UI http://elb-endpoint:8080 , which are stored to the mysql DB.
 
+  * GET all message
+
+    Retrived all messages from the DB using the api URL /api/message
+
+      ```
+       curl request - curl -X GET http://elb-endpoint:8080/api/message
+       UI - http://elb-endpoint:8080/api/message
+      ```
+
+  * GET a specific message
+
+    Retrived a specific message from the DB using the api URL /api/message/msg_id
+
+      ```
+      curl request - curl -X GET http://elb-endpoint:8080/api/message/msg_id
+      UI - http://elb-endpoint:8080/api/message/msg_id
+      ```
+
+  * DELETE a specific message
+
+    Delete a specific message from the DB using the api URL /api/message/msg_id
+
+      ```
+      curl request - curl -X DELETE http://elb-endpoint:8080/api/message/msg_id
+      ```
 
 ## Credits
 
