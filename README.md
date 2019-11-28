@@ -54,6 +54,10 @@ Usage
 
 2. Create DB schema
 
+
+    - Login to the mysql console with the DB details updated during terraform execution
+    - Create the table posts with the following command
+    
       ```
       create table posts (id int NOT NULL AUTO_INCREMENT UNIQUE, text varchar(255) NOT NULL, date_posted varchar(255) NOT NULL);
       ```
@@ -73,7 +77,7 @@ Usage
                 DB_SERVICE: *******
                 DB_PORT: *******
               ports:
-                  - "8000:8000"
+                  - "8080:8080"
 
    Update the DB environment variables which are prompted during the terraform execution
 
