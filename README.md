@@ -40,10 +40,13 @@ The following steps will walk you through the process:
 
 3. infra-tf directory conatins the terraform file for infra setup, use the following steps::
 
-      ```cd infra-tf
+      ```
+      cd infra-tf
       terraform init
       terraform plan
-      terraform apply```
+      terraform apply
+      ```
+
 
 4. Login to the cluster instance using the keys::
 
