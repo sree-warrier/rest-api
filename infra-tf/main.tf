@@ -227,15 +227,13 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 1.28.0"
 
-  identifier = "django-db"
+  identifier = "restapi-db"
 
   engine            = "mysql"
   engine_version    = "5.7.19"
   instance_class    = "db.t2.micro"
   allocated_storage = 20
   publicly_accessible = false
-  #max_allocated_storage = 25
-  #performance_insights_enabled = false
 
   name     = "${var.rds_name}"
   username = "${var.rds_user}"
@@ -243,16 +241,9 @@ module "db" {
   port     = "${var.rds_port}"
 
   iam_database_authentication_enabled = false
-
   vpc_security_group_ids = ["${aws_security_group.allow_rds.id}"]
-
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
-  # Enhanced Monitoring - see example for details on how to create the role
-  # by yourself, in case you don't want to create it automatically
-  #monitoring_interval = "30"
-  #monitoring_role_name = "MyRDSMonitoringRole"
-  #create_monitoring_role = false
 
   tags = {
     Name = "rest-cluster"
@@ -267,37 +258,6 @@ module "db" {
   # DB option group
   major_engine_version = "5.7"
 
-  # Snapshot name upon DB deletion
-  #final_snapshot_identifier = "demodb"
-
   # Database Deletion Protection
   deletion_protection = false
-
-#  parameters = [
-#    {
-#      name = "character_set_client"
-#      value = "utf8"
-#    },
-#    {
-#      name = "character_set_server"
-#      value = "utf8"
-#    }
-#  ]
-#
-#  options = [
-#    {
-#      option_name = "MARIADB_AUDIT_PLUGIN"
-#
-#      option_settings = [
-#        {
-#          name  = "SERVER_AUDIT_EVENTS"
-#          value = "CONNECT"
-#        },
-#        {
-#          name  = "SERVER_AUDIT_FILE_ROTATIONS"
-#          value = "37"
-#        },
-#      ]
-#    },
-#  ]
 }
