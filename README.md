@@ -26,7 +26,7 @@ Usage
 
 ### Infra Deployment
 
-      Building the infra using terraform commands, following steps will walk you through the process:
+  Building the infra using terraform commands, following steps will walk you through the process:
 
 1. Clone the repo:
 
